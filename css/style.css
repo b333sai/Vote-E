@@ -1,0 +1,165 @@
+/*COMMON PROPERTIES ACROSS ALL THE DOCUMENTS*/
+body
+{
+ background-color: #f0f0fb;
+font-family:"Times New Roman";
+}
+
+/*THIS IS FOR THE MAIN CONTAINER///////////////////////////////////////////////////////////////*/
+#container
+{
+ width: 100%;
+ margin:-10px auto;
+}
+/*THIS IS FOR THE MAIN CONTAINER///////////////////////////////////////////////////////////////*/
+
+/*THIS IS FOR THE HEADER IMAGE/////////////////////////////////////////////////////////////////*/
+#header img
+{
+ width: 100%;
+ height: 150px;
+ border-radius: 0 0 10px 10px;
+}
+/*THIS IS FOR THE HEADER IMAGE/////////////////////////////////////////////////////////////////*/
+
+a
+{
+ color: #3360ff;
+}
+a:hover
+{
+ color: #66cc00;
+ text-decoration: underline;
+}
+/*COMMON PROPERTIES ACROSS ALL THE DOCUMENTS*/
+
+
+
+
+
+
+/*//////////////////////////REGISTER LINK ON THE MAIN PAGE/////////////////////////////////////*/
+/*a.register
+{
+ color: red;
+}
+a.register:hover
+{
+ text-decoration: underline;
+}*/
+/*//////////////////////////REGISTER LINK ON THE MAIN PAGE/////////////////////////////////////*/
+
+
+
+
+
+
+
+/*STYLE OF ALL CLASSES*/
+/*////////////////This is for the logout button ///////////////////////////////////////////////*/
+.logout
+{
+ float: right;
+ width: 100px;
+ height: 50px;
+ font-size: 25px;
+ color: green;
+}
+/*////////////////This is for the logout button ///////////////////////////////////////////////*/
+
+/*////////////////This is for the logout button ///////////////////////////////////////////////*/
+
+
+.results
+{
+ padding-top: 10px;
+}
+td.post,#post
+{
+ color: #cc6600;
+ font-size: 32px;
+}
+td.fields
+{
+ color: green;
+ font: "Serif";
+}
+td.nominee
+{
+ font-family:Arial;
+ height: 120px;
+ padding-left: 40px;
+ font-size: 23;
+ color: #006600;
+}
+tr.row
+{
+ background-color: #aaaaaa;
+}
+tr.head
+{
+font-size: 35px;
+color: #9966ff;
+font-style: bold;
+}
+font.members
+{
+ font-size: 21;
+ color: #006600;
+}
+font.error
+{
+ color: red;
+ font-size: 20;
+}
+tr.main_nominee
+{
+ background-color:#666666;
+}
+tr.nominee
+{
+ height: 32px;
+ background-color:#aaaaaa;
+}
+.n_image
+{
+ width:100px;
+ height: 100px;
+ box-shadow: 5px 5px 10px #888888;
+}
+/*CSS OF ALL CLASSES*/
+
+
+
+/*ALL IDENTIFIERS*/
+#post
+{
+ color: #ffff00;
+ padding: 0 25px 0 25px;
+}
+#result,#none
+{
+ font-size: 22px;
+ color: white;
+ padding: 0 25px 0 25px;
+}
+#none
+{
+ color: #993333;
+}
+#votes,#unknown
+{
+ font-size: 22px;
+ padding: 0 25px 0 25px;
+ color: white;
+}
+#unknown
+{
+ color: red;
+}
+#footer
+{
+ margin-top:10px;
+ text-align: center;
+ background: #ffffff;
+}
