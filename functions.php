@@ -4,17 +4,31 @@ include("connect.php");
 ?>
 
 <?php
+//This function is for login form
+function login()
+{
+echo '<center><span class=heading >Student Login</span>
+<form action=index.php method=post onsubmit=return(check(0)) >
+<table>
+<tr><td align=left ><input class=inp placeholder="Your roll number..." type=text name=rollnumber maxlength=9 /></td></tr>
+<tr><td align=left ><input class=inp placeholder="Your password..." type=password name=password  maxlength=15 /></td></tr>
+<tr><td align=center ><input class=btn type=submit value=Login name=login /></td></tr></form></table></center>';
+}
+//end of login form
+
+
+
+
 //This function is for the welcome message
 function welcome()
 {
- echo br(1)."<font size=7 color=#994422 ><center class=welcome >Welcome to the Student Elections 2013-14</center></font>";
- echo br(2);
+ echo br(1).'<p id="welcome" >Welcome to the Student Elections 2014-15</p>';
 }
 //This function is for the welcome message
 
 
 //This function is to introduce breaks in the document
- function br($x)
+function br($x)
   {
    for($y=0;$y<$x;$y=$y+1)
     {
@@ -44,30 +58,31 @@ function welcome()
 //end of present time function
  
  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 //this function is to display the candidates for a nomination
- function display($row2,$tmp)//$tmp stores the post of the previous nominee
+ function display($rollnumber, $fullname, $post, $hl, $count)//$tmp stores the post of the previous nominee
   {
-   if($row2[activate]==1)//proceeding only if the post is activated
-	{
-   	 if($tmp != $row2[post] && $tmp != "0" )//printing the horiz line only if post is changed
-	  {
-	   echo "<tr><td><hr color=white ></td><td><hr color=white ></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>";
-	  }
-     $pst=$row2[post];
-	 $pst=str_replace(' ','',$pst);
-	 $pst=str_replace('.','',$pst);
-     if($tmp != $row2[post])//printing the post if its not equal to the old post
-	  {			   
+   if(!$hl)
+     {
 	   echo "<tr>";
-	   echo "<td class=post align=left >* ".$row2[post]."</td></tr>";
-	  }
-
-	 echo '<tr><td class=nominee align=left ><input type=radio value='.$row2[rollnumber].' name='.$pst.' id='.$row2[rollnumber].' /><label for='.$row2[rollnumber].' >&nbsp;'.$row2[fullname].' ('.strtoupper($row2[rollnumber]).')</label></td><td><img src=images/'.$row2[rollnumber].'.jpg alt=nominee class=n_image title='.$row2[rollnumber].' /></td></tr>';
-     
-	  return $row2[post];//updating the $tmp value if the post has been changed by returning it
-	}
-  }	
+	   echo "<td class=post align=left colspan=2 >".$count.". ".$post."</td></tr>";
+	 }
+   echo '<tr><td class=nominee align=left ><input type=radio value='.$rollnumber.' name="'.$post.'" id='.$rollnumber.' /><label for='.$rollnumber.' >&nbsp;'.$fullname.' ('.$rollnumber.')</label></td><td class=nominee ><img src=img/'.$rollnumber.'.jpg alt=nominee class=n_image title='.$rollnumber.' /></td></tr>';
+  }
 //end of the display function which prints each nominee in the voting list
+
+
+
+
+
+
 
 
 
@@ -154,7 +169,7 @@ function welcome()
 //This function is to insert a logout button in the document
 function logout()
 {
-echo "<form action=logout.php method=post ><input type=submit name=logout value=Logout  class=logout ></form>";
+echo "<form action=index.php method=post ><input type=submit name=logout value=Logout  class=logout ></form>";
 }
 //This function is to insert a logout button in the document
 
@@ -169,22 +184,76 @@ function erraneous()
 
 
 
+//This function is to validate the registrations details
+function student_validations($rollnumber, $password, $confirmpassword, $gender, $fullname)
+  {
+    $grp=substr($rollnumber, 0, 3);
+	$grad=substr($rollnumber, 5, 1);
+	$year=substr($rollnumber, 3, 2);
+	
+    if($password=="" || $confirmpassword=="" || strlen($password)<9 || strlen($password)>15 || strlen($confirmpassword)<9 || strlen($confirmpassword)>15 || $password!=$confirmpassword || $gender==-1 || strlen($rollnumber)!=9 || ($grp!="coe" && $grp!="edm" && $grp!="mdm" && $grp!="cds" && $grp!="eds" && $grp!="mds" && $grp!="mat" && $grp!="phy") || ($grad!="b" && $grad!="m" && $grad!="d" ) || ($year!="10" && $year!="11" && $year!="12" && $year!="13" && $year!="14") || substr($rollnumber, 6, 1)!="0" || $fullname=="")
+	  {
+	    return 0;
+	  }
+	else
+	  {
+	    return 1;
+	  }
+  }
+//This function is to validate the registrations details
+
+
+
+
+
+
+
 //This function is for displaying the registration form
 function reg_form()
 {
- echo "<center><form action=register.php method=POST onsubmit=return(check(1)) >";
- echo "<b><font size=6 color=black >Registration</font></b>
- </br></br><table><tr><td align=right class=fields ><strong>Full Name:</strong></td><td align=left ><input type=text name=fullname size=33 /></td></tr>
- <tr><td align=right  class=fields ><strong>Gender:</strong></td><td align=left ><select name=gender >
- <option value=-1 selected >[select]</option><option value=m  >male </option>
- <option value=f  >female</option></select></td></tr>
- <tr><td align=right  class=fields ><strong>Roll Number:</strong></td><td align=left ><input type=text name=rollnumber size=33/></td></tr>
- <tr><td align=right class=fields  ><strong>Password:</strong></td><td align=left ><input type=password name=password size=33></td></tr>
- <tr><td></td><td align=left ><font size=3 color=red>(should be between 9 to 15 characters)</font></td></tr>
- <tr><td align=right  class=fields ><strong>Confirm Password:</strong></td><td align=left ><input type=password name=confirmpassword size=33></td></tr>
- <tr><td></td><td><center><input type=submit value=Register name=register_w class=register ></center></td></tr></table></form></center>";
+ echo '<center><h1 class=heading >Registration</h1>
+ <form action=register.php method=POST onsubmit=return(check(1)) >
+ <table>
+ <tr>
+ <td align=left ><input  class=inp  placeholder="Full Name..." maxlength=51 type=text name=fullname size=33 /></td>
+ </tr>
+ 
+ <tr>
+ <td align=left ><select  class=inp name=gender >
+ <option value=-1 selected >[Gender]</option>
+ <option value=m  >male </option>
+ <option value=f  >female</option></select></td>
+ </tr>
+ 
+ <tr>
+ <td align=left ><input class=inp placeholder="Roll Number..." size=15 maxlength=9 minlength=9 type=text name=rollnumber size=33/></td>
+ </tr>
+ 
+ <tr>
+ <td align=left ><input  class=inp  placeholder="Password..." type=password  maxlength=15 minlength=9 name=password size=20></td>
+ </tr>
+ 
+ <tr>
+ <td align=left ><font size=3 color=red>(should be between 9 to 15 characters)</font></td>
+ </tr>
+ 
+ <tr>
+ <td align=left ><input  class=inp  placeholder="Confirm Password..."  maxlength=15 minlength=9 type=password name=confirmpassword size=20></td>
+ </tr>
+ 
+ <tr>
+ <td><center><input  class=btn type=submit value=Register name=register_w class=register ></center></td>
+ </tr>
+ </table>
+ </form>
+ </center>';
 }
 //This function is for displaying the registration form
+
+
+
+
+
 
 ///
 function check_active($post)
@@ -196,12 +265,22 @@ return $row2;
 ///
 
 
+
+
+
+
 ///This function is for the already voted message////////////////////////////////////////////////
 function vote_error()
 {
  echo br(7)."<center><font color=red size=6 class=error >You have already voted!</font></center>";
 }
 ///This function is for the already voted message////////////////////////////////////////////////
+
+
+
+
+
+
 
 ///this function is for various consideration issues in displaying the voting form
 function voting_cons($row,$rollnumber)

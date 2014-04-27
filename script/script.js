@@ -45,7 +45,7 @@ function check(value)//The value of 'value' determines whether it is login or re
   var zero=roll.substring(6,7);
   var number=roll.substring(7,9);
   number=parseInt(number);
-  if(value==1)//If value of 'value'=1 then validate registration details
+  if(value==1)//If 'value'=1 then validate registration details
    {
     var cpass=document.forms[0].confirmpassword.value;
     if(document.forms[0].fullname.value=="" || (/^[a-zA-Z- ]*$/.test(document.forms[0].fullname.value) == false) )
@@ -136,11 +136,21 @@ return true;
 
 
 
-
+var submit=0;
 ////////////This is called when the submit button of voting form is clicked//////////////////
 function checkip()
 {
- var retval=confirm("Please check whether you have voted for all the categories. Do you wish to continue? ");
- return retval;
+
+  var val=confirm("Are you sure that you have voted for all the posts? \n\n Click Ok to proceed \n Click cancel to recheck\n");
+  if(val)
+   {
+    return true;
+   }
+  else
+   {
+    return false;
+   }
+  //alert("Please check whether you have voted for all the posts");
+  //return true;
 }
 ////////////This is called when the submit button of voting form is clicked//////////////////
